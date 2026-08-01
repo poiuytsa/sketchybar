@@ -3,7 +3,7 @@
 A minimal, macOS-inspired SketchyBar configuration focused on clean design, smooth interactions, and a polished Spotify experience.
 
 <p align="center">
-  <img src="assets/Screenshot.png" width="100%">
+  <img src="assets/screenshot.png" width="100%">
 </p>
 
 ---
