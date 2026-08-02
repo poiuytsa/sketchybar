@@ -4,227 +4,298 @@ SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 ##### Bar #####
 
 sketchybar --bar \
-height=38 \
-margin=0 \
-corner_radius=14 \
-position=top \
-color=0xdd1c1815 \
-border_width=1 \
-border_color=0x18ffffff \
-blur_radius=34 \
-topmost=on \
-sticky=on \
-y_offset=0
+  height=38 \
+  margin=0 \
+  corner_radius=14 \
+  position=top \
+  color=0xdd1c1815 \
+  border_width=1 \
+  border_color=0x18ffffff \
+  blur_radius=34 \
+  topmost=on \
+  sticky=on \
+  y_offset=0
 
 ##### Defaults #####
 
 sketchybar --default \
-label.font="SF Pro:Semibold:14.0" \
-label.color=0xfff5e0dc \
-icon.font="SF Pro:Bold:14.0" \
-icon.color=0xfff5e0dc \
-icon.y_offset=1 \
-padding_left=8 \
-padding_right=8 \
-label.padding_left=6 \
-label.padding_right=6 \
-icon.padding_left=6 \
-icon.padding_right=6 \
-background.height=28 \
-background.corner_radius=8
+  label.font="SF Pro:Semibold:14.0" \
+  label.color=0xfff5e0dc \
+  icon.font="SF Pro:Bold:14.0" \
+  icon.color=0xfff5e0dc \
+  icon.y_offset=1 \
+  padding_left=8 \
+  padding_right=8 \
+  label.padding_left=6 \
+  label.padding_right=6 \
+  icon.padding_left=6 \
+  icon.padding_right=6 \
+  background.height=28 \
+  background.corner_radius=8
+
+##### Events #####
+
+sketchybar --add event spotify_update "$SPOTIFY_EVENT"
 
 ##### Items #####
+# Each block below is a fully self-contained sketchybar call. Nothing here
+# depends on line continuation across blocks, so a mistake in one block
+# can't silently swallow the ones after it.
 
-sketchybar \
-\
---add item apple left \
---set apple \
-icon=􀣺 \
-icon.font="SF Pro:Bold:18.0" \
-icon.padding_left=2 \
-icon.padding_right=14 \
-click_script="open -a 'Raycast'" \
-\
---add event spotify_update $SPOTIFY_EVENT \
-\
---add item spotify.art left \
---set spotify.art \
-script="$PLUGIN_DIR/spotify_artwork.sh" \
-update_freq=1 \
-width=34 \
-icon.drawing=off \
-label.drawing=off \
-background.drawing=on \
-background.height=32 \
-background.corner_radius=10 \
-background.padding_left=1 \
-background.padding_right=1 \
-\
---subscribe spotify.art system_woke \
-\
---add item spotify left \
---set spotify \
-script="$PLUGIN_DIR/spotify.sh" \
-icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
-icon.color=0xff1DB954 \
-icon.y_offset=0 \
-label.font="SF Pro:Semibold:14.0" \
-label.max_chars=40 \
-label.padding_left=6 \
-label.padding_right=10 \
-\
---subscribe spotify \
-    spotify_update \
-    mouse.entered.global \
-    mouse.exited.global \
-\
---add item spotify.back left \
---set spotify.back \
-script="$PLUGIN_DIR/spotify.sh" \
-drawing=off \
-icon=􀊊 \
-icon.font="SF Pro:Bold:16.0" \
-icon.color=0xff1DB954 \
-\
---subscribe spotify.back mouse.clicked \
-\
---add item spotify.playpause left \
---set spotify.playpause \
-script="$PLUGIN_DIR/spotify.sh" \
-drawing=off \
-icon.font="SF Pro:Bold:16.0" \
-icon.color=0xff1DB954 \
-\
---subscribe spotify.playpause mouse.clicked \
-\
---add item spotify.forward left \
---set spotify.forward \
-script="$PLUGIN_DIR/spotify.sh" \
-drawing=off \
-icon=􀊌 \
-icon.font="SF Pro:Bold:16.0" \
-icon.color=0xff1DB954 \
-\
---subscribe spotify.forward mouse.clicked \
-\
---add item clock right \
---set clock \
-update_freq=10 \
-icon=􀐬 \
-icon.font="SF Pro:Bold:15.0" \
-icon.padding_left=8 \
-icon.padding_right=6 \
-label.padding_left=2 \
-label.padding_right=10 \
-padding_left=8 \
-padding_right=8 \
-script="$PLUGIN_DIR/clock.sh" \
-\
---add item battery right \
---set battery \
-script="$PLUGIN_DIR/battery.sh" \
-icon.font="SF Pro:Bold:15.0" \
-icon.padding_left=8 \
-icon.padding_right=6 \
-label.padding_left=2 \
-label.padding_right=8 \
-padding_left=8 \
-padding_right=8 \
-update_freq=30 \
-\
---subscribe battery \
-    system_woke \
-    power_source_change \
-\
---add item volume right \
---set volume \
-script="$PLUGIN_DIR/volume.sh" \
-icon.font="SF Pro:Bold:15.0" \
-icon.padding_left=8 \
-icon.padding_right=6 \
-label.padding_left=2 \
-label.padding_right=8 \
-padding_left=8 \
-padding_right=8 \
-update_freq=2 \
-\
---subscribe volume \
-    volume_change \
-    system_woke \
-\
---add item wifi right \
---set wifi \
-script="$PLUGIN_DIR/wifi.sh" \
-icon.font="SF Pro:Bold:15.0" \
-icon.padding_left=8 \
-icon.padding_right=8 \
-padding_left=8 \
-padding_right=8 \
-update_freq=10 \
-\
---subscribe wifi \
-    wifi_change \
-    system_woke \
-\
---add item cpu right \
---set cpu \
-script="$PLUGIN_DIR/cpu.sh" \
-icon.font="SF Pro:Bold:15.0" \
-icon.padding_left=8 \
-icon.padding_right=6 \
-label.padding_left=2 \
-label.padding_right=8 \
-padding_left=8 \
-padding_right=8 \
-update_freq=2 \
-\
---subscribe cpu system_woke
+sketchybar --add item apple left
+sketchybar --set apple \
+  icon=􀣺 \
+  icon.font="SF Pro:Bold:18.0" \
+  icon.padding_left=2 \
+  icon.padding_right=6 \
+  click_script="open -a 'Raycast'"
+
+sketchybar --add item spotify.art left
+sketchybar --set spotify.art \
+  script="$PLUGIN_DIR/spotify_artwork.sh" \
+  update_freq=1 \
+  width=34 \
+  icon.drawing=off \
+  label.drawing=off \
+  background.drawing=on \
+  background.height=32 \
+  background.corner_radius=10 \
+  background.padding_left=1 \
+  background.padding_right=1 \
+  padding_left=2 \
+  padding_right=0
+sketchybar --subscribe spotify.art system_woke
+
+sketchybar --add item spotify left
+sketchybar --set spotify \
+  script="$PLUGIN_DIR/spotify.sh" \
+  icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
+  icon.color=0xff1DB954 \
+  icon.y_offset=0 \
+  label.font="SF Pro:Semibold:14.0" \
+  label.max_chars=28 \
+  label.padding_left=6 \
+  label.padding_right=10
+sketchybar --subscribe spotify \
+  spotify_update \
+  mouse.entered.global \
+  mouse.exited.global
+
+sketchybar --add item spotify.back left
+sketchybar --set spotify.back \
+  script="$PLUGIN_DIR/spotify.sh" \
+  drawing=off \
+  icon=􀊊 \
+  icon.font="SF Pro:Bold:16.0" \
+  icon.color=0xff1DB954 \
+  icon.padding_left=2 \
+  icon.padding_right=2 \
+  padding_left=1 \
+  padding_right=1
+sketchybar --subscribe spotify.back mouse.clicked
+
+sketchybar --add item spotify.playpause left
+sketchybar --set spotify.playpause \
+  script="$PLUGIN_DIR/spotify.sh" \
+  drawing=off \
+  icon.font="SF Pro:Bold:16.0" \
+  icon.color=0xff1DB954 \
+  icon.padding_left=2 \
+  icon.padding_right=2 \
+  padding_left=1 \
+  padding_right=1
+sketchybar --subscribe spotify.playpause mouse.clicked
+
+sketchybar --add item spotify.forward left
+sketchybar --set spotify.forward \
+  script="$PLUGIN_DIR/spotify.sh" \
+  drawing=off \
+  icon=􀊌 \
+  icon.font="SF Pro:Bold:16.0" \
+  icon.color=0xff1DB954 \
+  icon.padding_left=2 \
+  icon.padding_right=2 \
+  padding_left=1 \
+  padding_right=1
+sketchybar --subscribe spotify.forward mouse.clicked
+
+# ---------- Visualizer ----------
+# Each bar is its own independent sketchybar item, updated directly by the
+# Swift daemon via `sketchybar --set spotify.visN ...`. No script/subscribe
+# needed here since nothing in sketchybar's event system drives these.
+for i in $(seq 1 9); do
+  sketchybar --add item "spotify.vis$i" left
+  vis_padding_right=0
+  if [ "$i" = "9" ]; then
+    vis_padding_right=6   # extra clearance so the capsule's rounded corner doesn't clip the last bar
+  fi
+  sketchybar --set "spotify.vis$i" \
+    icon.drawing=off \
+    label="▁" \
+    label.font="JetBrainsMono Nerd Font:Regular:12.0" \
+    label.padding_left=0 \
+    label.padding_right=0 \
+    padding_left=0 \
+    padding_right="$vis_padding_right" \
+    width=9
+done
+
+# ---------- Notch spacer ----------
+# sketchybar has no notch awareness on its own — it just lays items out
+# left-to-right, so a wide left group can end up rendering underneath the
+# physical camera cutout. Apple + spotify stay tight together as one block;
+# this spacer creates the blank gap after them so the status icons on the
+# right (which are anchored from the right edge already) end up clear of
+# the notch instead of the spotify group running into it. NOTCH_WIDTH is
+# queried live so it's correct on any notched MacBook; falls back to a sane
+# default if jq isn't installed.
+NOTCH_WIDTH=$(sketchybar --query bar 2>/dev/null | command -v jq >/dev/null 2>&1 && sketchybar --query bar | jq -r '.notch_width // 0')
+if [ -z "$NOTCH_WIDTH" ] || [ "$NOTCH_WIDTH" = "0" ]; then
+  NOTCH_WIDTH=150   # adjust to taste if your menu bar layout still overlaps
+fi
+
+sketchybar --add item notch.spacer left
+sketchybar --set notch.spacer \
+  icon.drawing=off \
+  label.drawing=off \
+  width="$NOTCH_WIDTH"
+
+sketchybar --add item clock right
+sketchybar --set clock \
+  update_freq=10 \
+  icon=􀐬 \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.padding_left=8 \
+  icon.padding_right=6 \
+  label.padding_left=2 \
+  label.padding_right=10 \
+  padding_left=8 \
+  padding_right=8 \
+  script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item battery right
+sketchybar --set battery \
+  script="$PLUGIN_DIR/battery.sh" \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.padding_left=5 \
+  icon.padding_right=4 \
+  label.padding_left=2 \
+  label.padding_right=5 \
+  padding_left=5 \
+  padding_right=5 \
+  update_freq=30
+sketchybar --subscribe battery \
+  system_woke \
+  power_source_change
+
+sketchybar --add item volume right
+sketchybar --set volume \
+  script="$PLUGIN_DIR/volume.sh" \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.padding_left=5 \
+  icon.padding_right=4 \
+  label.padding_left=2 \
+  label.padding_right=5 \
+  padding_left=5 \
+  padding_right=5 \
+  update_freq=2
+sketchybar --subscribe volume \
+  volume_change \
+  system_woke
+
+sketchybar --add item wifi right
+sketchybar --set wifi \
+  script="$PLUGIN_DIR/wifi.sh" \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.padding_left=5 \
+  icon.padding_right=5 \
+  label.drawing=off \
+  padding_left=5 \
+  padding_right=5 \
+  update_freq=10
+sketchybar --subscribe wifi \
+  wifi_change \
+  system_woke
+
+sketchybar --add item ram right
+sketchybar --set ram \
+  script="$PLUGIN_DIR/ram.sh" \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.padding_left=5 \
+  icon.padding_right=4 \
+  label.padding_left=2 \
+  label.padding_right=5 \
+  padding_left=5 \
+  padding_right=5 \
+  update_freq=2
+sketchybar --subscribe ram system_woke
+
+sketchybar --add item cpu right
+sketchybar --set cpu \
+  script="$PLUGIN_DIR/cpu.sh" \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.padding_left=5 \
+  icon.padding_right=4 \
+  label.padding_left=2 \
+  label.padding_right=5 \
+  padding_left=5 \
+  padding_right=5 \
+  update_freq=2
+sketchybar --subscribe cpu system_woke
 
 ##### Spotify Capsule #####
 
-sketchybar \
---add bracket spotify_group \
-    spotify.art \
-    spotify \
-    spotify.back \
-    spotify.playpause \
-    spotify.forward \
-\
---set spotify_group \
-background.color=0xdd242731 \
-background.corner_radius=13 \
-background.height=32 \
-background.padding_left=6 \
-background.padding_right=6 \
-background.border_width=1 \
-background.border_color=0x14f2e0c8 \
-shadow.drawing=on \
-shadow.color=0x40000000 \
-shadow.distance=2 \
-shadow.angle=270
+sketchybar --add bracket spotify_group \
+  spotify.art \
+  spotify \
+  spotify.back \
+  spotify.playpause \
+  spotify.forward \
+  spotify.vis1 \
+  spotify.vis2 \
+  spotify.vis3 \
+  spotify.vis4 \
+  spotify.vis5 \
+  spotify.vis6 \
+  spotify.vis7 \
+  spotify.vis8 \
+  spotify.vis9
+
+sketchybar --set spotify_group \
+  background.color=0xdd242731 \
+  background.corner_radius=13 \
+  background.height=32 \
+  background.padding_left=6 \
+  background.padding_right=10 \
+  background.border_width=1 \
+  background.border_color=0x14f2e0c8 \
+  shadow.drawing=on \
+  shadow.color=0x40000000 \
+  shadow.distance=2 \
+  shadow.angle=270
 
 ##### Status Capsule #####
 
-sketchybar \
---add bracket status_group \
-    cpu \
-    wifi \
-    volume \
-    battery \
-    clock \
-\
---set status_group \
-background.color=0xdd242731 \
-background.corner_radius=13 \
-background.height=32 \
-background.padding_left=6 \
-background.padding_right=6 \
-background.border_width=1 \
-background.border_color=0x14f2e0c8 \
-shadow.drawing=on \
-shadow.color=0x40000000 \
-shadow.distance=2 \
-shadow.angle=270
+sketchybar --add bracket status_group \
+  cpu \
+  ram \
+  wifi \
+  volume \
+  battery \
+  clock
+
+sketchybar --set status_group \
+  background.color=0xdd242731 \
+  background.corner_radius=13 \
+  background.height=32 \
+  background.padding_left=6 \
+  background.padding_right=6 \
+  background.border_width=1 \
+  background.border_color=0x14f2e0c8 \
+  shadow.drawing=on \
+  shadow.color=0x40000000 \
+  shadow.distance=2 \
+  shadow.angle=270
 
 ##### Refresh #####
 

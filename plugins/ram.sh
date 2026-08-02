@@ -2,34 +2,23 @@
 
 # ---------- Settings ----------
 
-HISTORY_FILE="/tmp/sketchybar_cpu_history"
-TEMP_FILE="/tmp/cpu_history_tmp"
+HISTORY_FILE="/tmp/sketchybar_ram_history"
 
 # ---------- Initialize History ----------
 
 if [ ! -f "$HISTORY_FILE" ]; then
-    yes 0 | head -n 5    > "$HISTORY_FILE"
+    printf "0\n0\n0\n0\n0\n" > "$HISTORY_FILE"
 fi
 
-# ---------- Current CPU ----------
+# ---------- Current RAM ----------
 
-CPU=$(top -l 2 -n 0 | awk '/^CPU/ {usage=$3+$5} END {printf "%.0f", usage}')
-
-# ---------- CPU Icon Color ----------
-
-if [ "$CPU" -lt 40 ]; then
-    COLOR=0xff34C759
-elif [ "$CPU" -lt 75 ]; then
-    COLOR=0xffFFD60A
-else
-    COLOR=0xffFF453A
-fi
+RAM=$(memory_pressure | awk '/System-wide memory free percentage/ {print 100-$5}' | tr -d '%')
 
 # ---------- Update History ----------
 
-tail -n 4 "$HISTORY_FILE" > "$TEMP_FILE"
-echo "$CPU" >> "$TEMP_FILE"
-mv "$TEMP_FILE" "$HISTORY_FILE"
+tail -n 4 "$HISTORY_FILE" > /tmp/ram_history_tmp
+echo "$RAM" >> /tmp/ram_history_tmp
+mv /tmp/ram_history_tmp "$HISTORY_FILE"
 
 # ---------- Build Graph ----------
 
@@ -59,12 +48,11 @@ while read VALUE; do
 
 done < "$HISTORY_FILE"
 
-
-# ---------- Update SketchyBar ----------
+# ---------- Update ----------
 sketchybar --set "$NAME" \
-    icon="􀧓" \
+    icon="􀫦" \
     icon.color=0xffffffff \
-    label="${CPU}% $GRAPH" \
-    label.color=0xff34C759 \
-    label.highlight="${CPU}%" \
+    label="${RAM}% $GRAPH" \
+    label.color=0xff64A8FF \
+    label.highlight="${RAM}%" \
     label.highlight_color=0xffffffff

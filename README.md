@@ -1,9 +1,13 @@
 # 🍎 SketchyBar
 
-A minimal, macOS-inspired SketchyBar configuration focused on clean design, smooth interactions, and a polished Spotify experience.
+A clean, macOS-inspired SketchyBar configuration focused on smooth animations, native styling, and a polished Spotify experience.
 
 <p align="center">
-  <img src="assets/screenshot.png" width="100%">
+  <img src="assets/demo.gif" width="100%" alt="SketchyBar Demo">
+</p>
+
+<p align="center">
+  <img src="assets/ss.png" width="100%" alt="SketchyBar Screenshot">
 </p>
 
 ---
@@ -11,33 +15,36 @@ A minimal, macOS-inspired SketchyBar configuration focused on clean design, smoo
 ## ✨ Features
 
 ### 🎵 Spotify
+
 - Live Spotify integration
+- Animated Swift-powered visualizer (30 FPS)
 - Dynamic album artwork
 - Album-aware capsule tint
 - Previous / Play-Pause / Next controls
-- Scrolling song titles
+- Auto-scrolling song titles
 - Opens Spotify on click
 
 ### 📊 System
 
-- CPU usage with live sparkline history
-- Smart battery widget
-  - 🟢 Green while charging
-  - ⚪ White above 20%
-  - 🟡 Yellow below 20%
-  - 🔴 Red below 10%
+- CPU usage with animated sparkline history
+- RAM usage with animated sparkline history
+- Smart battery indicator
+  - 🟢 Charging
+  - ⚪ Above 20%
+  - 🟡 Below 20%
+  - 🔴 Below 10%
 - Volume indicator
 - Wi-Fi status
 - Clock
 
 ### 🎨 Design
 
-- Glassmorphism-inspired interface
-- Floating rounded menu bar
-- Dynamic Spotify colors based on album art
+- Floating glassmorphism-inspired menu bar
+- Rounded capsules
 - Native SF Symbols
 - SF Pro typography
-- Consistent spacing and rounded capsules
+- Smooth animations throughout
+- Consistent spacing and sizing
 
 ---
 
@@ -45,8 +52,10 @@ A minimal, macOS-inspired SketchyBar configuration focused on clean design, smoo
 
 - macOS
 - SketchyBar
-- ImageMagick
 - nowplaying-cli
+- ImageMagick
+- jq
+- Swift (for the Spotify visualizer)
 - SF Pro
 - JetBrainsMono Nerd Font
 
@@ -60,24 +69,3 @@ git clone https://github.com/poiuytsa/sketchybar.git
 cp -R sketchybar ~/.config/
 
 brew services restart sketchybar
-```
-
----
-
-## 📁 Structure
-
-```
-sketchybar/
-│
-├── plugins/
-│   ├── spotify.sh
-│   ├── spotify_artwork.sh
-│   ├── battery.sh
-│   ├── cpu.sh
-│   ├── volume.sh
-│   ├── wifi.sh
-│   └── clock.sh
-│
-└── sketchybarrc
-```
-

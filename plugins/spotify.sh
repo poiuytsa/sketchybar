@@ -40,33 +40,6 @@ case "$NAME" in
         ;;
 esac
 
-# Hover
-case "$SENDER" in
-    mouse.entered)
-        sketchybar --animate tanh 20 \
-            --set spotify_group \
-                background.border_color=0x28f2e0c8 \
-            --set spotify.back \
-                alpha=1.0 \
-            --set spotify.playpause \
-                alpha=1.0 \
-            --set spotify.forward \
-                alpha=1.0
-        exit
-        ;;
-    mouse.exited)
-        sketchybar --animate tanh 20 \
-            --set spotify_group \
-                background.border_color=0x14f2e0c8 \
-            --set spotify.back \
-                alpha=0.75 \
-            --set spotify.playpause \
-                alpha=0.75 \
-            --set spotify.forward \
-                alpha=0.75
-        exit
-        ;;
-esac
 
 SONG=$(osascript -e 'tell application "Spotify" to get name of current track')
 ARTIST=$(osascript -e 'tell application "Spotify" to get artist of current track')
@@ -94,16 +67,13 @@ sketchybar \
         drawing=on \
         icon="􀊊" \
         icon.color=0xff1DB954 \
-        alpha=0.75 \
     \
     --set spotify.playpause \
         drawing=on \
         icon="$PLAY_ICON" \
         icon.color=0xff1DB954 \
-        alpha=0.75 \
     \
     --set spotify.forward \
         drawing=on \
         icon="􀊌" \
         icon.color=0xff1DB954 \
-        alpha=0.75

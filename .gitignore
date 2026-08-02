@@ -1,3 +1,10 @@
 .DS_Store
+
+swift/spotify_visualizer
+swift/.build/
+swift/.swiftpm/
+
+*.o
+*.dSYM
+
 tmp/
-*.log
