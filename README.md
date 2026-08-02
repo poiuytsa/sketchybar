@@ -3,7 +3,7 @@
 A clean, macOS-inspired SketchyBar configuration focused on smooth animations, native styling, and a polished Spotify experience.
 
 <p align="center">
-  <img src="assets/demo.gif" width="100%" alt="SketchyBar Demo">
+  <img src="assets/demo1.gif" width="100%" alt="SketchyBar Demo">
 </p>
 
 <p align="center">
