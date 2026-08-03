@@ -1,3 +1,9 @@
+pkill -f spotify_visualizer 2>/dev/null
+
+if [ -x "$HOME/.config/sketchybar/swift/spotify_visualizer" ]; then
+  "$HOME/.config/sketchybar/swift/spotify_visualizer" &
+fi
+
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 
