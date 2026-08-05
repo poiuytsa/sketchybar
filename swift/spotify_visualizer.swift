@@ -27,6 +27,23 @@ private extension NSLock {
     }
 }
 
+// MARK: - Prevent App Nap
+
+// Without this, macOS throttles this process's timers/threads after it's
+// been idle in the background for a while — which is exactly the "goes
+// flat and never comes back after a longer pause" symptom. Holding this
+// activity for the process's lifetime keeps polling and rendering at full
+// cadence regardless of how long Spotify sits paused.
+private let keepAliveActivity = ProcessInfo.processInfo.beginActivity(
+    options: [.userInitiated, .idleSystemSleepDisabled, .automaticTerminationDisabled, .suddenTerminationDisabled],
+    reason: "Continuous SketchyBar visualizer updates"
+)
+
+private func log(_ message: String) {
+    let timestamp = ISO8601DateFormatter().string(from: Date())
+    FileHandle.standardError.write(Data("[\(timestamp)] \(message)\n".utf8))
+}
+
 // MARK: - Spotify polling (runs on its own background thread)
 
 /// Polls Spotify's playback state off the render loop so a slow AppleScript
@@ -39,11 +56,24 @@ final class SpotifyMonitor {
 
     init(pollInterval: TimeInterval) {
         Thread.detachNewThread { [weak self] in
+            var lastLogged: Bool? = nil
+            var pollCount = 0
             while let self {
                 let playing = Self.queryPlaybackState()
                 self.lock.synchronized { self._isPlaying = playing }
+
+                pollCount += 1
+                if playing != lastLogged {
+                    log("SpotifyMonitor: isPlaying changed to \(playing) (poll #\(pollCount))")
+                    lastLogged = playing
+                }
+                if pollCount % 60 == 0 { // ~every 30s at 0.5s interval, confirms thread hasn't died
+                    log("SpotifyMonitor: heartbeat, poll #\(pollCount), current isPlaying=\(playing)")
+                }
+
                 Thread.sleep(forTimeInterval: pollInterval)
             }
+            log("SpotifyMonitor: thread exiting (self deallocated) — this should never happen")
         }
     }
 
@@ -52,18 +82,31 @@ final class SpotifyMonitor {
         task.executableURL = URL(fileURLWithPath: "/usr/bin/osascript")
         task.arguments = ["-e", "tell application \"Spotify\" to get player state"]
 
-        let stdout = Pipe()
-        task.standardOutput = stdout
-        task.standardError = Pipe() // swallow "Spotify isn't running" noise
+        let stdoutPipe = Pipe()
+        let stderrPipe = Pipe()
+        task.standardOutput = stdoutPipe
+        task.standardError = stderrPipe // swallow "Spotify isn't running" noise
 
         do {
             try task.run()
         } catch {
+            log("SpotifyMonitor: osascript failed to launch: \(error)")
             return false
         }
+
+        // Read before waiting on exit (avoids a deadlock if output ever
+        // exceeds the pipe buffer), then explicitly close every fd this
+        // call opened. Letting Pipe/Process rely on ARC deinit timing to
+        // close descriptors leaks them over a long-running process and
+        // eventually causes "Bad file descriptor" errors.
+        let data = stdoutPipe.fileHandleForReading.readDataToEndOfFile()
         task.waitUntilExit()
 
-        let data = stdout.fileHandleForReading.readDataToEndOfFile()
+        try? stdoutPipe.fileHandleForReading.close()
+        try? stdoutPipe.fileHandleForWriting.close()
+        try? stderrPipe.fileHandleForReading.close()
+        try? stderrPipe.fileHandleForWriting.close()
+
         let state = String(data: data, encoding: .utf8)?
             .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
@@ -174,7 +217,7 @@ enum SketchyBar {
         do {
             try process.run() // fire-and-forget: no waitUntilExit, keeps the loop unblocked
         } catch {
-            FileHandle.standardError.write(Data("sketchybar update failed: \(error)\n".utf8))
+            log("SketchyBar.update failed to launch process: \(error)")
         }
     }
 }
@@ -184,11 +227,19 @@ enum SketchyBar {
 let monitor = SpotifyMonitor(pollInterval: Config.spotifyPollInterval)
 let visualizer = BarVisualizer()
 var lastFrameTime = Date()
+var frameCount = 0
+
+log("main loop starting")
 
 while true {
     let now = Date()
     let dt = now.timeIntervalSince(lastFrameTime)
     lastFrameTime = now
+
+    frameCount += 1
+    if frameCount % 900 == 0 { // ~every 30s at 30fps, confirms the render loop hasn't stalled
+        log("main loop heartbeat, frame #\(frameCount), dt=\(dt), isPlaying=\(monitor.isPlaying)")
+    }
 
     let bars: [Bar]
     if monitor.isPlaying {

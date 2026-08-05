@@ -1,0 +1,135 @@
+[2026-08-05T05:48:09Z] main loop starting
+[2026-08-05T05:48:09Z] SpotifyMonitor: isPlaying changed to false (poll #1)
+[2026-08-05T05:48:13Z] SpotifyMonitor: isPlaying changed to true (poll #8)
+[2026-08-05T05:48:15Z] SpotifyMonitor: isPlaying changed to false (poll #11)
+[2026-08-05T05:48:42Z] main loop heartbeat, frame #900, dt=0.038352012634277344, isPlaying=false
+[2026-08-05T05:48:46Z] SpotifyMonitor: heartbeat, poll #60, current isPlaying=false
+[2026-08-05T05:49:15Z] main loop heartbeat, frame #1800, dt=0.03622293472290039, isPlaying=false
+[2026-08-05T05:49:23Z] SpotifyMonitor: heartbeat, poll #120, current isPlaying=false
+[2026-08-05T05:49:49Z] main loop heartbeat, frame #2700, dt=0.03823506832122803, isPlaying=false
+[2026-08-05T05:50:01Z] SpotifyMonitor: heartbeat, poll #180, current isPlaying=false
+[2026-08-05T05:50:22Z] main loop heartbeat, frame #3600, dt=0.038365960121154785, isPlaying=false
+[2026-08-05T05:50:39Z] SpotifyMonitor: heartbeat, poll #240, current isPlaying=false
+[2026-08-05T05:50:55Z] main loop heartbeat, frame #4500, dt=0.03824198246002197, isPlaying=false
+[2026-08-05T05:51:17Z] SpotifyMonitor: heartbeat, poll #300, current isPlaying=false
+[2026-08-05T05:51:28Z] main loop heartbeat, frame #5400, dt=0.03835892677307129, isPlaying=false
+[2026-08-05T05:51:55Z] SpotifyMonitor: heartbeat, poll #360, current isPlaying=false
+[2026-08-05T05:52:02Z] main loop heartbeat, frame #6300, dt=0.03756296634674072, isPlaying=false
+[2026-08-05T05:52:33Z] SpotifyMonitor: heartbeat, poll #420, current isPlaying=false
+[2026-08-05T05:52:35Z] main loop heartbeat, frame #7200, dt=0.036158084869384766, isPlaying=false
+[2026-08-05T05:53:08Z] main loop heartbeat, frame #8100, dt=0.03677499294281006, isPlaying=false
+[2026-08-05T05:53:11Z] SpotifyMonitor: heartbeat, poll #480, current isPlaying=false
+[2026-08-05T05:53:42Z] main loop heartbeat, frame #9000, dt=0.03766500949859619, isPlaying=false
+[2026-08-05T05:53:48Z] SpotifyMonitor: heartbeat, poll #540, current isPlaying=false
+[2026-08-05T05:54:15Z] main loop heartbeat, frame #9900, dt=0.035881996154785156, isPlaying=false
+[2026-08-05T05:54:26Z] SpotifyMonitor: heartbeat, poll #600, current isPlaying=false
+[2026-08-05T05:54:49Z] main loop heartbeat, frame #10800, dt=0.03837907314300537, isPlaying=false
+[2026-08-05T05:55:04Z] SpotifyMonitor: heartbeat, poll #660, current isPlaying=false
+[2026-08-05T05:55:22Z] main loop heartbeat, frame #11700, dt=0.03355896472930908, isPlaying=false
+[2026-08-05T05:55:42Z] SpotifyMonitor: heartbeat, poll #720, current isPlaying=false
+[2026-08-05T05:55:55Z] main loop heartbeat, frame #12600, dt=0.0383530855178833, isPlaying=false
+[2026-08-05T05:56:20Z] SpotifyMonitor: heartbeat, poll #780, current isPlaying=false
+[2026-08-05T05:56:28Z] main loop heartbeat, frame #13500, dt=0.03836703300476074, isPlaying=false
+[2026-08-05T05:56:58Z] SpotifyMonitor: heartbeat, poll #840, current isPlaying=false
+[2026-08-05T05:57:02Z] main loop heartbeat, frame #14400, dt=0.03835904598236084, isPlaying=false
+[2026-08-05T05:57:35Z] main loop heartbeat, frame #15300, dt=0.03595602512359619, isPlaying=false
+[2026-08-05T05:57:36Z] SpotifyMonitor: heartbeat, poll #900, current isPlaying=false
+[2026-08-05T05:58:08Z] main loop heartbeat, frame #16200, dt=0.033558011054992676, isPlaying=false
+[2026-08-05T05:58:14Z] SpotifyMonitor: heartbeat, poll #960, current isPlaying=false
+[2026-08-05T05:58:41Z] main loop heartbeat, frame #17100, dt=0.03666400909423828, isPlaying=false
+[2026-08-05T05:58:51Z] SpotifyMonitor: heartbeat, poll #1020, current isPlaying=false
+[2026-08-05T05:59:15Z] main loop heartbeat, frame #18000, dt=0.036958932876586914, isPlaying=false
+[2026-08-05T05:59:29Z] SpotifyMonitor: heartbeat, poll #1080, current isPlaying=false
+[2026-08-05T05:59:48Z] main loop heartbeat, frame #18900, dt=0.037278056144714355, isPlaying=false
+[2026-08-05T06:00:07Z] SpotifyMonitor: heartbeat, poll #1140, current isPlaying=false
+[2026-08-05T06:00:21Z] main loop heartbeat, frame #19800, dt=0.03836405277252197, isPlaying=false
+[2026-08-05T06:00:44Z] SpotifyMonitor: heartbeat, poll #1200, current isPlaying=false
+[2026-08-05T06:00:55Z] main loop heartbeat, frame #20700, dt=0.03635096549987793, isPlaying=false
+[2026-08-05T06:01:22Z] SpotifyMonitor: heartbeat, poll #1260, current isPlaying=false
+[2026-08-05T06:01:28Z] main loop heartbeat, frame #21600, dt=0.03763902187347412, isPlaying=false
+[2026-08-05T06:01:34Z] SpotifyMonitor: osascript failed to launch: Error Domain=NSPOSIXErrorDomain Code=9 "Bad file descriptor"
+[2026-08-05T06:02:00Z] SpotifyMonitor: heartbeat, poll #1320, current isPlaying=false
+[2026-08-05T06:02:02Z] main loop heartbeat, frame #22500, dt=0.03835701942443848, isPlaying=false
+[2026-08-05T06:02:35Z] main loop heartbeat, frame #23400, dt=0.03835403919219971, isPlaying=false
+[2026-08-05T06:02:37Z] SpotifyMonitor: heartbeat, poll #1380, current isPlaying=false
+[2026-08-05T06:03:08Z] main loop heartbeat, frame #24300, dt=0.03434896469116211, isPlaying=false
+[2026-08-05T06:03:15Z] SpotifyMonitor: heartbeat, poll #1440, current isPlaying=false
+[2026-08-05T06:03:42Z] main loop heartbeat, frame #25200, dt=0.03837394714355469, isPlaying=false
+[2026-08-05T06:03:53Z] SpotifyMonitor: heartbeat, poll #1500, current isPlaying=false
+[2026-08-05T06:04:15Z] main loop heartbeat, frame #26100, dt=0.03835499286651611, isPlaying=false
+[2026-08-05T06:04:30Z] SpotifyMonitor: heartbeat, poll #1560, current isPlaying=false
+[2026-08-05T06:04:48Z] main loop heartbeat, frame #27000, dt=0.038388967514038086, isPlaying=false
+[2026-08-05T06:05:08Z] SpotifyMonitor: heartbeat, poll #1620, current isPlaying=false
+[2026-08-05T06:05:22Z] main loop heartbeat, frame #27900, dt=0.03337991237640381, isPlaying=false
+[2026-08-05T06:05:46Z] SpotifyMonitor: heartbeat, poll #1680, current isPlaying=false
+[2026-08-05T06:05:55Z] main loop starting
+[2026-08-05T06:05:55Z] SpotifyMonitor: isPlaying changed to false (poll #1)
+[2026-08-05T06:05:57Z] SpotifyMonitor: isPlaying changed to true (poll #3)
+[2026-08-05T06:05:58Z] SpotifyMonitor: isPlaying changed to false (poll #5)
+[2026-08-05T06:06:29Z] main loop heartbeat, frame #900, dt=0.03543400764465332, isPlaying=false
+[2026-08-05T06:06:32Z] SpotifyMonitor: heartbeat, poll #60, current isPlaying=false
+[2026-08-05T06:07:02Z] main loop heartbeat, frame #1800, dt=0.03835105895996094, isPlaying=false
+[2026-08-05T06:07:10Z] SpotifyMonitor: heartbeat, poll #120, current isPlaying=false
+[2026-08-05T06:07:35Z] main loop heartbeat, frame #2700, dt=0.0383530855178833, isPlaying=false
+[2026-08-05T06:07:48Z] SpotifyMonitor: heartbeat, poll #180, current isPlaying=false
+[2026-08-05T06:08:09Z] main loop heartbeat, frame #3600, dt=0.03832709789276123, isPlaying=false
+[2026-08-05T06:08:26Z] SpotifyMonitor: heartbeat, poll #240, current isPlaying=false
+[2026-08-05T06:08:42Z] main loop heartbeat, frame #4500, dt=0.03836095333099365, isPlaying=false
+[2026-08-05T06:09:03Z] SpotifyMonitor: heartbeat, poll #300, current isPlaying=false
+[2026-08-05T06:09:15Z] main loop heartbeat, frame #5400, dt=0.037127017974853516, isPlaying=false
+[2026-08-05T06:09:41Z] SpotifyMonitor: heartbeat, poll #360, current isPlaying=false
+[2026-08-05T06:09:49Z] main loop heartbeat, frame #6300, dt=0.03526604175567627, isPlaying=false
+[2026-08-05T06:10:19Z] SpotifyMonitor: heartbeat, poll #420, current isPlaying=false
+[2026-08-05T06:10:22Z] main loop heartbeat, frame #7200, dt=0.038362979888916016, isPlaying=false
+[2026-08-05T06:10:55Z] main loop heartbeat, frame #8100, dt=0.038380980491638184, isPlaying=false
+[2026-08-05T06:10:57Z] SpotifyMonitor: heartbeat, poll #480, current isPlaying=false
+[2026-08-05T06:11:29Z] main loop heartbeat, frame #9000, dt=0.03370499610900879, isPlaying=false
+[2026-08-05T06:11:35Z] SpotifyMonitor: heartbeat, poll #540, current isPlaying=false
+[2026-08-05T06:12:02Z] main loop heartbeat, frame #9900, dt=0.036318063735961914, isPlaying=false
+[2026-08-05T06:12:13Z] SpotifyMonitor: heartbeat, poll #600, current isPlaying=false
+[2026-08-05T06:12:35Z] main loop heartbeat, frame #10800, dt=0.03358101844787598, isPlaying=false
+[2026-08-05T06:12:51Z] SpotifyMonitor: heartbeat, poll #660, current isPlaying=false
+[2026-08-05T06:13:08Z] main loop heartbeat, frame #11700, dt=0.034649014472961426, isPlaying=false
+[2026-08-05T06:13:28Z] SpotifyMonitor: heartbeat, poll #720, current isPlaying=false
+[2026-08-05T06:13:42Z] main loop heartbeat, frame #12600, dt=0.03539907932281494, isPlaying=false
+[2026-08-05T06:14:06Z] SpotifyMonitor: heartbeat, poll #780, current isPlaying=false
+[2026-08-05T06:14:15Z] main loop heartbeat, frame #13500, dt=0.035256028175354004, isPlaying=false
+[2026-08-05T06:14:44Z] SpotifyMonitor: heartbeat, poll #840, current isPlaying=false
+[2026-08-05T06:14:48Z] main loop heartbeat, frame #14400, dt=0.0381929874420166, isPlaying=false
+[2026-08-05T06:15:21Z] main loop heartbeat, frame #15300, dt=0.038359999656677246, isPlaying=false
+[2026-08-05T06:15:22Z] SpotifyMonitor: heartbeat, poll #900, current isPlaying=false
+[2026-08-05T06:15:55Z] main loop heartbeat, frame #16200, dt=0.0346909761428833, isPlaying=false
+[2026-08-05T06:15:59Z] SpotifyMonitor: heartbeat, poll #960, current isPlaying=false
+[2026-08-05T06:16:28Z] main loop heartbeat, frame #17100, dt=0.038366079330444336, isPlaying=false
+[2026-08-05T06:16:37Z] SpotifyMonitor: heartbeat, poll #1020, current isPlaying=false
+[2026-08-05T06:17:01Z] main loop heartbeat, frame #18000, dt=0.038365960121154785, isPlaying=false
+[2026-08-05T06:17:15Z] SpotifyMonitor: heartbeat, poll #1080, current isPlaying=false
+[2026-08-05T06:17:35Z] main loop heartbeat, frame #18900, dt=0.03576803207397461, isPlaying=false
+[2026-08-05T06:17:53Z] SpotifyMonitor: heartbeat, poll #1140, current isPlaying=false
+[2026-08-05T06:18:08Z] main loop heartbeat, frame #19800, dt=0.034796953201293945, isPlaying=false
+[2026-08-05T06:18:31Z] SpotifyMonitor: heartbeat, poll #1200, current isPlaying=false
+[2026-08-05T06:18:41Z] main loop heartbeat, frame #20700, dt=0.03836393356323242, isPlaying=false
+[2026-08-05T06:19:09Z] SpotifyMonitor: heartbeat, poll #1260, current isPlaying=false
+[2026-08-05T06:19:14Z] main loop heartbeat, frame #21600, dt=0.03773701190948486, isPlaying=false
+[2026-08-05T06:19:46Z] SpotifyMonitor: heartbeat, poll #1320, current isPlaying=false
+[2026-08-05T06:19:48Z] main loop heartbeat, frame #22500, dt=0.03835093975067139, isPlaying=false
+[2026-08-05T06:20:21Z] main loop heartbeat, frame #23400, dt=0.03730499744415283, isPlaying=false
+[2026-08-05T06:20:24Z] SpotifyMonitor: heartbeat, poll #1380, current isPlaying=false
+[2026-08-05T06:20:54Z] main loop heartbeat, frame #24300, dt=0.03836798667907715, isPlaying=false
+[2026-08-05T06:21:02Z] SpotifyMonitor: heartbeat, poll #1440, current isPlaying=false
+[2026-08-05T06:21:28Z] main loop heartbeat, frame #25200, dt=0.03835189342498779, isPlaying=false
+[2026-08-05T06:21:39Z] SpotifyMonitor: heartbeat, poll #1500, current isPlaying=false
+[2026-08-05T06:22:01Z] main loop heartbeat, frame #26100, dt=0.03787398338317871, isPlaying=false
+[2026-08-05T06:22:17Z] SpotifyMonitor: heartbeat, poll #1560, current isPlaying=false
+[2026-08-05T06:22:34Z] main loop heartbeat, frame #27000, dt=0.0383610725402832, isPlaying=false
+[2026-08-05T06:22:55Z] SpotifyMonitor: heartbeat, poll #1620, current isPlaying=false
+[2026-08-05T06:23:07Z] main loop heartbeat, frame #27900, dt=0.03489100933074951, isPlaying=false
+[2026-08-05T06:23:11Z] SpotifyMonitor: isPlaying changed to true (poll #1644)
+[2026-08-05T06:23:12Z] SpotifyMonitor: isPlaying changed to false (poll #1645)
+[2026-08-05T06:23:13Z] SpotifyMonitor: isPlaying changed to true (poll #1648)
+[2026-08-05T06:23:33Z] SpotifyMonitor: heartbeat, poll #1680, current isPlaying=true
+[2026-08-05T06:23:42Z] main loop heartbeat, frame #28800, dt=0.039212942123413086, isPlaying=true
+[2026-08-05T06:24:11Z] SpotifyMonitor: heartbeat, poll #1740, current isPlaying=true
+[2026-08-05T06:24:16Z] main loop heartbeat, frame #29700, dt=0.03989994525909424, isPlaying=true
+[2026-08-05T06:24:48Z] SpotifyMonitor: heartbeat, poll #1800, current isPlaying=true
+[2026-08-05T06:24:50Z] main loop heartbeat, frame #30600, dt=0.03930008411407471, isPlaying=true
