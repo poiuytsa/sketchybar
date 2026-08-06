@@ -10,7 +10,7 @@ SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
 ##### Bar #####
 
 sketchybar --bar \
-  height=38 \
+  height=34 \
   margin=0 \
   corner_radius=14 \
   position=top \
