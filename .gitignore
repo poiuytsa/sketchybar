@@ -4,6 +4,8 @@ swift/spotify_visualizer
 swift/.build/
 swift/.swiftpm/
 
+swift/visualizer.log
+
 *.o
 *.dSYM
 
