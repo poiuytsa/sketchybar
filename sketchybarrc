@@ -48,13 +48,16 @@ sketchybar --add event spotify_update "$SPOTIFY_EVENT"
 # depends on line continuation across blocks, so a mistake in one block
 # can't silently swallow the ones after it.
 
-sketchybar --add item apple left
-sketchybar --set apple \
-  icon=􀣺 \
-  icon.font="SF Pro:Bold:18.0" \
-  icon.padding_left=2 \
-  icon.padding_right=6 \
-  click_script="open -a 'Raycast'"
+sketchybar --add item spotify.marker left
+sketchybar --set spotify.marker \
+  icon=􀑪 \
+  icon.font="SF Pro:Bold:13.0" \
+  icon.color=0xffc9c2b8 \
+  icon.padding_left=0 \
+  icon.padding_right=0 \
+  label.drawing=off \
+  padding_left=8 \
+  padding_right=14
 
 sketchybar --add item spotify.art left
 sketchybar --set spotify.art \
@@ -65,23 +68,29 @@ sketchybar --set spotify.art \
   label.drawing=off \
   background.drawing=on \
   background.height=32 \
-  background.corner_radius=10 \
+  background.corner_radius=8 \
+  background.border_width=1 \
+  background.border_color=0x20ffffff \
   background.padding_left=1 \
   background.padding_right=1 \
-  padding_left=2 \
+  padding_left=1 \
   padding_right=0
 sketchybar --subscribe spotify.art system_woke
 
 sketchybar --add item spotify left
 sketchybar --set spotify \
   script="$PLUGIN_DIR/spotify.sh" \
-  icon.font="JetBrainsMono Nerd Font:Regular:16.0" \
-  icon.color=0xff1DB954 \
-  icon.y_offset=0 \
+  icon.drawing=off \
   label.font="SF Pro:Semibold:14.0" \
-  label.max_chars=28 \
-  label.padding_left=6 \
-  label.padding_right=10
+  label.padding_left=3 \
+  label.padding_right=3 \
+  label.max_chars=25 \
+  label.scroll_texts=off \
+  padding_left=0 \
+  padding_right=0 \
+  width=190 \
+  drawing=on \
+  click_script="open -a Spotify"
 sketchybar --subscribe spotify \
   spotify_update \
   mouse.entered.global \
@@ -96,8 +105,8 @@ sketchybar --set spotify.back \
   icon.color=0xff1DB954 \
   icon.padding_left=2 \
   icon.padding_right=2 \
-  padding_left=1 \
-  padding_right=1
+  padding_left=5 \
+  padding_right=3
 sketchybar --subscribe spotify.back mouse.clicked
 
 sketchybar --add item spotify.playpause left
@@ -108,8 +117,8 @@ sketchybar --set spotify.playpause \
   icon.color=0xff1DB954 \
   icon.padding_left=2 \
   icon.padding_right=2 \
-  padding_left=1 \
-  padding_right=1
+  padding_left=3 \
+  padding_right=3
 sketchybar --subscribe spotify.playpause mouse.clicked
 
 sketchybar --add item spotify.forward left
@@ -121,8 +130,8 @@ sketchybar --set spotify.forward \
   icon.color=0xff1DB954 \
   icon.padding_left=2 \
   icon.padding_right=2 \
-  padding_left=1 \
-  padding_right=1
+  padding_left=3 \
+  padding_right=3
 sketchybar --subscribe spotify.forward mouse.clicked
 
 # ---------- Visualizer ----------
@@ -146,19 +155,77 @@ for i in $(seq 1 9); do
     width=9
 done
 
-# ---------- Notch spacer ----------
-# sketchybar has no notch awareness on its own — it just lays items out
-# left-to-right, so a wide left group can end up rendering underneath the
-# physical camera cutout. Apple + spotify stay tight together as one block;
-# this spacer creates the blank gap after them so the status icons on the
-# right (which are anchored from the right edge already) end up clear of
-# the notch instead of the spotify group running into it. NOTCH_WIDTH is
-# queried live so it's correct on any notched MacBook; falls back to a sane
-# default if jq isn't installed.
-NOTCH_WIDTH=$(sketchybar --query bar 2>/dev/null | command -v jq >/dev/null 2>&1 && sketchybar --query bar | jq -r '.notch_width // 0')
-if [ -z "$NOTCH_WIDTH" ] || [ "$NOTCH_WIDTH" = "0" ]; then
-  NOTCH_WIDTH=150   # adjust to taste if your menu bar layout still overlaps
+NOTCH_GEOM=$(swift -e '
+import AppKit
+if let s = NSScreen.screens.first {
+  let l = s.auxiliaryTopLeftArea?.width ?? 0
+  let r = s.auxiliaryTopRightArea?.width ?? 0
+  print(Int(l))
+  print(Int(s.frame.width - r))
+}
+' 2>/dev/null)
+
+NOTCH_START=$(echo "$NOTCH_GEOM" | sed -n '1p')
+NOTCH_END=$(echo "$NOTCH_GEOM" | sed -n '2p')
+
+if [ -z "$NOTCH_START" ] || [ -z "$NOTCH_END" ] || [ "$NOTCH_END" -le "$NOTCH_START" ] 2>/dev/null; then
+  # Fallback measured on this machine — re-measure if display/res changes.
+  NOTCH_START=646
+  NOTCH_END=825
 fi
+NOTCH_WIDTH=$((NOTCH_END - NOTCH_START))
+
+echo "$NOTCH_START" > "$HOME/.config/sketchybar/.notch_start"
+
+# ---------- Progress bar ----------
+# Two adjacent thin background bars (fill + track) are resized every tick
+# by spotify_progress.sh so together they read as one line growing
+# left-to-right with playback position. spotify.progress is an invisible
+# driver item (width=0) that owns the script/update_freq so the two visible
+# bars aren't each independently re-triggering osascript calls.
+# Added AFTER notch.spacer above, so it renders in guaranteed-clear space
+# to the right of the physical camera cutout instead of partially
+# underneath it.
+
+sketchybar --add item spotify.progress.spacer left
+sketchybar --set spotify.progress.spacer \
+  icon.drawing=off \
+  label.drawing=off \
+  width=20
+
+sketchybar --add item spotify.progress.fill left
+sketchybar --set spotify.progress.fill \
+  icon.drawing=off \
+  label.drawing=off \
+  background.drawing=on \
+  background.color=0xff1DB954 \
+  background.height=3 \
+  background.corner_radius=1 \
+  padding_left=6 \
+  padding_right=0 \
+  width=0
+
+sketchybar --add item spotify.progress.track left
+sketchybar --set spotify.progress.track \
+  icon.drawing=off \
+  label.drawing=off \
+  background.drawing=on \
+  background.color=0x301DB954 \
+  background.height=3 \
+  background.corner_radius=2 \
+
+sketchybar --add item spotify.progress left
+sketchybar --set spotify.progress \
+  script="$PLUGIN_DIR/spotify_progress.sh" \
+  icon.drawing=off \
+  label.drawing=off \
+  padding_left=0 \
+  padding_right=0 \
+  width=0 \
+  update_freq=1
+sketchybar --subscribe spotify.progress \
+  spotify_update \
+  system_woke
 
 sketchybar --add item notch.spacer left
 sketchybar --set notch.spacer \
@@ -265,6 +332,7 @@ sketchybar --subscribe cpu system_woke
 ##### Spotify Capsule #####
 
 sketchybar --add bracket spotify_group \
+  spotify.marker \
   spotify.art \
   spotify \
   spotify.back \
@@ -284,8 +352,8 @@ sketchybar --set spotify_group \
   background.color=0xdd242731 \
   background.corner_radius=13 \
   background.height=32 \
-  background.padding_left=6 \
-  background.padding_right=10 \
+  background.padding_left=4 \
+  background.padding_right=6 \
   background.border_width=1 \
   background.border_color=0x14f2e0c8 \
   shadow.drawing=on \

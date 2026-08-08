@@ -3,11 +3,9 @@
 forward() {
     osascript -e 'tell application "Spotify" to play next track'
 }
-
 back() {
     osascript -e 'tell application "Spotify" to play previous track'
 }
-
 play() {
     osascript -e 'tell application "Spotify" to playpause'
 }
@@ -40,11 +38,19 @@ case "$NAME" in
         ;;
 esac
 
-
 SONG=$(osascript -e 'tell application "Spotify" to get name of current track')
 ARTIST=$(osascript -e 'tell application "Spotify" to get artist of current track')
-
 LABEL="$SONG • $ARTIST"
+
+
+# Hard-clip the label to a fixed character budget so the item (and the
+# capsule around it) never resizes based on title length. This replaces
+# the old scroll_texts approach, which auto-sized to the full text before
+# animating and could still push the item wider than its fixed `width`.
+MAX_LEN=25
+if [ "${#LABEL}" -gt "$MAX_LEN" ]; then
+    LABEL="$(printf '%s' "$LABEL" | cut -c1-$((MAX_LEN - 1)))…"
+fi
 
 if [ "$PLAYER_STATE" = "playing" ]; then
     PLAY_ICON="􀊘"
@@ -58,9 +64,7 @@ sketchybar \
         icon="" \
         icon.color=0xff1DB954 \
         label="$LABEL" \
-        label.max_chars=40 \
-        label.scroll_duration=35 \
-        scroll_texts=on \
+        scroll_texts=off \
         click_script="open -a Spotify" \
     \
     --set spotify.back \
